@@ -110,7 +110,7 @@ router.post('/chat' , function(req, res){
     encrypted: true
   });
 
-  channels_client.trigger(appChannel, 'chat', {
+  channels_client.trigger(appChannel, 'chatevent', {
     "message": nickName + " said: " + chatmessage
   });
 
@@ -139,9 +139,10 @@ router.post('/msg' , function(req, res){
     cluster: 'ap1',
     encrypted: true
   });
-
-  channels_client.trigger(appChannel, 'chat', {
-    "message": nickName + " said to you: " + chatmessage
+  console.log("Inside dm");
+  
+  channels_client.trigger(appChannel, 'dmchat-event', {
+    "message": "!!" + destNickName + "!!" + nickName + " said to you: " + chatmessage
   });
 
   res.send('ok');
